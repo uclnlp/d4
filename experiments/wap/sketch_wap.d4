@@ -1,0 +1,49 @@
+VARIABLE LENGTH
+VARIABLE QUESTION
+CREATE REPR_BUFFER 4 ALLOT
+CREATE NUM_BUFFER 4 ALLOT
+
+VARIABLE REPR
+VARIABLE NUM
+
+REPR_BUFFER REPR !
+NUM_BUFFER NUM !
+
+3 LENGTH !
+
+MACRO: STEP_NUM
+  NUM @ 1+ NUM !
+;
+
+MACRO: STEP_REPR
+  REPR @ 1+ REPR !
+;
+
+
+MACRO: CURRENT_NUM NUM @ @ ;
+MACRO: CURRENT_REPR REPR @ @ ;
+
+CURRENT_NUM
+STEP_NUM
+CURRENT_NUM
+STEP_NUM
+CURRENT_NUM
+
+
+QUESTION @ >R
+CURRENT_REPR >R
+STEP_REPR
+CURRENT_REPR >R
+STEP_REPR
+CURRENT_REPR >R
+
+{ observe R0 R-1 R-2 R-3 -> permute D0 D-1 D-2 } \ permute stack elements based on the question representation
+
+{ observe R0 R-1 R-2 R-3 -> choose + - * / }
+{ observe R0 R-1 R-2 R-3 -> choose SWAP NOP }
+{ observe R0 R-1 R-2 R-3 -> choose + - * / }
+
+R> DROP
+R> DROP
+R> DROP
+R> DROP

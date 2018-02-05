@@ -1,0 +1,26 @@
+: BUBBLE ( a1 ... an n-1 -- one-bubble-pass )
+    DUP IF
+        \ put length-1 on stack
+        >R
+
+        \ prepare recursive function call
+        { observe D0 D-1 -> choose NOP SWAP }
+
+        \ swap the tops
+        R> SWAP >R
+
+        \ call bubble on the shorter sequence
+        1- BUBBLE
+
+        \ put remembered top element back on stack
+        R>
+    ELSE
+        DROP
+    THEN
+;
+
+: SORT ( a1 ... an n -- sorted )
+    1- DUP 0 DO >R R@ BUBBLE R> LOOP DROP
+;
+
+SORT

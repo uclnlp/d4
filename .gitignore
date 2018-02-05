@@ -1,0 +1,15 @@
+# OSX specific
+.DS_store
+
+# PyCharm specific
+.idea
+
+# Jupyter specific
+.ipynb_checkpoints
+
+# caches
+__pycache__
+.cache
+
+# saved models
+tmp/

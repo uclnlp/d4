@@ -1,0 +1,15 @@
+: add-digits ( a1 b1 a2 b2 ... an bn carry n -- r1 r2 ... r_{n+1} )
+    DUP 0 = IF
+        DROP
+    ELSE
+        >R
+        { observe D0 D-1 D-2 -> tanh -> linear 10 -> choose 0 1 }
+        { observe D-1 D-2 D-3 -> tanh -> linear 50 -> choose 0 1 2 3 4 5 6 7 8 9 }
+        >R SWAP DROP SWAP DROP SWAP DROP R>
+        R> 1- SWAP >R
+        add-digits
+        R>
+    THEN
+;
+add-digits
+
